@@ -29,16 +29,14 @@ export default React.createClass({
           <li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
           <li><NavLink to="/about">About</NavLink></li>
           <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-          {this.state.loggedIn ? (
-            <li><NavLink to="/logout">Logout</NavLink></li>
-          ) : (
-            <li><NavLink to="/login">Login</NavLink></li>
-          )}
+            {this.state.loggedIn ? (
+              <li><NavLink to="/logout">Logout</NavLink></li>
+            ) : (
+              <li><a href="/auth/github">Login</a></li>
+            )}
         </ul>
           {
-            this.props.children ||
-            this.state.loggedIn && <Home/> ||
-            <p>You are !this.state.loggedIn && 'not' logged in.</p>
+            this.props.children || <Home/>
           }
       </div>
     )

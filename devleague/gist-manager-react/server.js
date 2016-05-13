@@ -29,12 +29,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
 passport.use(new GitHubStrategy({
   clientID: CONFIG.GITHUB.ID,
   clientSecret: CONFIG.GITHUB.SECRET,
   callbackURL: "http://0.0.0.0:3000/auth/github/callback"
 },
 function(accessToken, refreshToken, profile, done) {
+  console.log(accessToken, 'accessToken')
   process.nextTick(function () {
     return done(null, profile);
   });
@@ -51,7 +60,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.json({ sucess: true});
+    res.redirect('/dashboard');
   });
 
 app.get('/logout', (req, res) => {
