@@ -29,6 +29,36 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
+passport.use(new GitHubStrategy({
+  clientID: CONFIG.GITHUB.ID,
+  clientSecret: CONFIG.GITHUB.SECRET,
+  callbackURL: "http://0.0.0.0:3000/auth/github/callback"
+},
+function(accessToken, refreshToken, profile, done) {
+  process.nextTick(function () {
+    return done(null, profile);
+  });
+}));
+
+
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'gist' ] }),
+  function(req, res){
+    console.log('/auth/github')
+    res.json({ sucess: true});
+  });
+
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.json({ sucess: true});
+  });
+
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 if (isDeveloping) {
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
@@ -47,53 +77,15 @@ if (isDeveloping) {
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
   app.get('*', function response(req, res) {
-    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
-    res.end();
-  });
+      res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
+      res.end();
+    });
 } else {
   app.use(express.static(__dirname + '/dist'));
   app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 }
-
-passport.use(new GitHubStrategy({
-  clientID: CONFIG.GITHUB.ID,
-  clientSecret: CONFIG.GITHUB.SECRET,
-  callbackURL: "http://0.0.0.0:3000/auth/github/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-  process.nextTick(function () {
-    return done(null, profile);
-  });
-}));
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-}
-
-app.get('/login', function(req, res){
-  res.json({ user: req.user });
-});
-
-app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email', 'gist' ] }),
-  function(req, res){
-    res.json({ sucess: true});
-  });
-
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
-
 
 app.listen(port, '0.0.0.0', function onStart(err) {
   if (err) {

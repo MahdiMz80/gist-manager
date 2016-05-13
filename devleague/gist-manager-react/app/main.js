@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
-import App from './App.jsx'
-import Home from './home/Home.jsx'
-import About from './about/About.jsx'
-import Login from './login/Login.jsx'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import App from './App.jsx';
+import Home from './home/Home.jsx';
+import About from './about/About.jsx';
+import Login from './shared/Login.jsx';
+import NoMatch from './shared/NoMatch.jsx';
 import Dashboard from './dashboard/Dashboard.jsx';
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route path="/login" component={Login}/>
       <Route path="/about" component={About}/>
       <Route path="/dashboard" component={Dashboard}/>
+      <Route path="*" component={NoMatch}/>
     </Route>
   </Router>,
   document.getElementById('root')
