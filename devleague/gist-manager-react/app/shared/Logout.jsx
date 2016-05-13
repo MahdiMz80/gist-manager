@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react'
-import auth from '../auth/auth'
+import auth from '../shared/auth'
 
 export default React.createClass({
   componentDidMount() {
@@ -11,4 +11,4 @@ export default React.createClass({
   render() {
     return <p>You are now logged out</p>
   }
-})
+});
