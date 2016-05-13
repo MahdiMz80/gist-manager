@@ -40,27 +40,25 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GitHubStrategy({
   clientID: CONFIG.GITHUB.ID,
   clientSecret: CONFIG.GITHUB.SECRET,
-  callbackURL: "http://0.0.0.0:3000/auth/github/callback"
+  callbackURL: 'http://0.0.0.0:3000/auth/github/callback'
 },
 function(accessToken, refreshToken, profile, done) {
-  console.log(accessToken, 'accessToken')
+  profile.accessToken = accessToken;
   process.nextTick(function () {
     return done(null, profile);
   });
 }));
 
-
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'gist' ] }),
-  function(req, res){
-    console.log('/auth/github')
+  function(req, res) {
     res.json({ sucess: true});
   });
 
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/dashboard');
+    res.redirect('/dashboard/?'+req.user.accessToken);
   });
 
 app.get('/logout', (req, res) => {

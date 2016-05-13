@@ -1,6 +1,7 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import NavLink from './navigation/NavLink.jsx';
+import Logout from './shared/Logout.jsx';
 import Home from './home/Home.jsx';
 import auth from './auth/auth'
 

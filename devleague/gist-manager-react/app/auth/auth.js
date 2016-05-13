@@ -1,15 +1,15 @@
 module.exports = {
-  login(email, pass, cb) {
-    cb = arguments[arguments.length - 1]
-    if (localStorage.token) {
-      if (cb) cb(true)
-      this.onChange(true)
-      return
-    }
+  login() {
+    var userData = window.location.search.replace(/[^\w\s]/gi, '');
+    userData = JSON.stringify(userData)
+    localStorage.token = userData;
+    console.log(localStorage.token, 'token');
+    // localStorage.setItem('user', JSON.stringify(userData));
+    // window.location = "/dashboard";
   },
 
   getToken() {
-    return localStorage.token
+    return localStorage.token;
   },
 
   logout(cb) {
