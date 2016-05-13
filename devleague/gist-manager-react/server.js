@@ -59,7 +59,7 @@
     passport.authenticate('github', { failureRedirect: '/login' }),
     function(req, res) {
       res.redirect(
-        '/?' + req.user.accessToken +
+        '/?token=' + req.user.accessToken +
         '&username=' + req.user.username +
         '&id=' + req.user.id
       );

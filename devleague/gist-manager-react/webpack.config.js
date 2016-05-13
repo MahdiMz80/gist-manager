@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'app/main.js')
+    path.join(__dirname, 'app/main.jsx')
   ],
   output: {
     path: path.join(__dirname, '/dist/'),
@@ -29,8 +29,13 @@ module.exports = {
     })
   ],
   module: {
+    // preLoaders: [{
+    //   test: /(\.js$|\.jsx$)/,
+    //   exclude: /node_modules/,
+    //   loader: "eslint-loader"
+    // }],
     loaders: [{
-      test: /\.jsx?$/,
+      test: /(\.js$|\.jsx$)/,
       exclude: /node_modules/,
       loader: 'babel',
       query: {
@@ -43,5 +48,8 @@ module.exports = {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }]
+  },
+  eslint: {
+    configFile: '.eslintrc'
   }
 };

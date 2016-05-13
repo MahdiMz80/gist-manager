@@ -20,12 +20,12 @@
 
   module.exports = {
     login() {
-      let userData = window.location.search.replace(/[^\w\s]/gi, '');
-      userData = JSON.stringify(userData);
-      localStorage.token = userData;
-      console.log(localStorage.token, 'token');
-      // localStorage.setItem('user', JSON.stringify(userData));
-      // window.location = "/dashboard";
+      if (localStorage.token) {
+        return;
+      }
+      let userData = urlQuery(window.location.search);
+      localStorage.token = JSON.stringify(userData);
+      console.log(this.getToken(),'getToken')
     },
 
     getToken() {
