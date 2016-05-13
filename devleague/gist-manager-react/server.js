@@ -1,5 +1,5 @@
+/*jshint esversion: 6 */
 'use strict';
-'esversion: 6';
 
 const path = require('path');
 const express = require('express');
@@ -52,13 +52,16 @@ function(accessToken, refreshToken, profile, done) {
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'gist' ] }),
   function(req, res) {
-    res.json({ sucess: true});
   });
 
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/dashboard/?'+req.user.accessToken);
+    res.redirect(
+      '/?' + req.user.accessToken +
+      '&username=' + req.user.username +
+      '&id=' + req.user.id
+    );
   });
 
 app.get('/logout', (req, res) => {
