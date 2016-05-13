@@ -9,9 +9,9 @@ import auth from './shared/auth';
 
 export default React.createClass({
   getInitialState() {
-    let user = {id:'', username:'', token:''}
-    if (auth.loggedIn()) {
-      console.log(auth.getToken(), 'auth.getToken()')
+    let user = {id:'', username:'', token:''};
+    if (!!auth.getToken) {
+      auth.login()
       user = JSON.parse(auth.getToken());
     }
     return {

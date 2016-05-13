@@ -12,7 +12,6 @@
     fields.forEach(function(element){
       fieldsObj[element[0]] = decodeURIComponent(element[1]);
     });
-    console.log(fieldsObj, 'fO')
     return fieldsObj;
   };
 
@@ -23,7 +22,6 @@
       }
       let userData = urlQuery(window.location.search);
       localStorage.token = JSON.stringify(userData);
-      console.log(this.getToken(),'getToken')
     },
 
     getToken() {
@@ -37,7 +35,6 @@
     },
 
     loggedIn() {
-      console.log(localStorage.token, '!!localStorage.token');
       return !!localStorage.token;
     },
 

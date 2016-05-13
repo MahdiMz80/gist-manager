@@ -13,6 +13,16 @@ import Login from './shared/Login.jsx';
 import NoMatch from './shared/NoMatch.jsx';
 import auth from './shared/auth';
 
+function requireAuth(nextState, replace) {
+  console.log(!auth.loggedIn(), '!auth.loggedIn()')
+  if (!auth.loggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+};
+
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
@@ -26,12 +36,3 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 );
-
-function requireAuth(nextState, replace) {
-  if (!auth.loggedIn()) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
-};
