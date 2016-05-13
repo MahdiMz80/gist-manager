@@ -1,12 +1,10 @@
 /* jshint esversion: 6 */
-(function() {
-  'use strict';
+'use strict';
 
-  import React from 'react';
+import React from 'react';
 
-  export default React.createClass({
-    render() {
-      return <div>No Page Found</div>
-    }
-  });
-}());
+export default React.createClass({
+  render() {
+    return <div>No Page Found</div>
+  }
+});

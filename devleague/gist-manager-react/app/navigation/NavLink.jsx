@@ -1,14 +1,12 @@
 /* jshint esversion: 6 */
-(function() {
-  'use strict';
+'use strict';
 
-  import React from 'react';
-  import { Link } from 'react-router';
-  import styles from './navigation.css';
+import React from 'react';
+import { Link } from 'react-router';
+import styles from './navigation.css';
 
-  export default React.createClass({
-    render() {
-      return <Link {...this.props} activeClassName={styles.active}/>
-    }
-  });
-}());
+export default React.createClass({
+  render() {
+    return <Link {...this.props} activeClassName={styles.active}/>
+  }
+});

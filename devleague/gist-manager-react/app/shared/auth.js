@@ -1,6 +1,4 @@
-/* jshint esversion: 6 */
-(function() {
-  'use strict';
+'use strict';
 
   const urlQuery = (fields) => {
     fields = (fields.substring(1));
@@ -14,7 +12,7 @@
     fields.forEach(function(element){
       fieldsObj[element[0]] = decodeURIComponent(element[1]);
     });
-
+    console.log(fieldsObj, 'fO')
     return fieldsObj;
   };
 
@@ -39,9 +37,9 @@
     },
 
     loggedIn() {
+      console.log(localStorage.token, '!!localStorage.token');
       return !!localStorage.token;
     },
 
     onChange() {}
-  };
-}());
+};
