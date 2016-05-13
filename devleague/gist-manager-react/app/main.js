@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import App from './App.jsx'
+import Home from './home/Home.jsx'
 import About from './about/About.jsx'
 import Login from './login/Login.jsx'
 import Dashboard from './dashboard/Dashboard.jsx';
 
 ReactDOM.render(
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
+      <IndexRoute component={Home}/>
       <Route path="/login" component={Login}/>
       <Route path="/about" component={About}/>
       <Route path="/dashboard" component={Dashboard}/>
