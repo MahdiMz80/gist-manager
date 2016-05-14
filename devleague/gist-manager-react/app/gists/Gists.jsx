@@ -3,11 +3,11 @@
 
 import React from 'react';
 import GistList from './GistList.jsx';
-import styles from './Dashboard.css';
+import styles from './Gists.css';
 import auth from '../shared/auth';
 import * as $ from'jquery';
 
-const Dashboard = React.createClass({
+const Gists = React.createClass({
   getInitialState() {
     const user = JSON.parse(auth.getToken());
     return {
@@ -50,4 +50,4 @@ const Dashboard = React.createClass({
   }
 });
 
-export default Dashboard;
+export default Gists;

@@ -2,12 +2,17 @@
 'use strict';
 
 import React from 'react';
+import { Link } from 'react-router';
 
 const GistItem = React.createClass({
   render: function() {
     return (
       <div className='GistItem'>
-        <h3>{ this.props.children }</h3>
+        <li>
+          <Link to={"/gist/" + this.props.gist.id}>
+            { this.props.children }
+          </Link>
+        </li>
       </div>
     )
   }

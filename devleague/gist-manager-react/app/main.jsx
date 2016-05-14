@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './App.jsx';
 import Home from './home/Home.jsx';
-import Dashboard from './dashboard/Dashboard.jsx';
+import Gists from './gists/Gists.jsx';
+import Gist from './gist/Gist.jsx';
 import About from './about/About.jsx';
 import Logout from './shared/Logout.jsx';
 import Login from './shared/Login.jsx';
@@ -28,7 +29,8 @@ ReactDOM.render(
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
       <Route path="/about" component={About}/>
-      <Route path="/dashboard" component={Dashboard} onEnter={requireAuth}/>
+      <Route path="/gists" component={Gists} onEnter={requireAuth}/>
+      <Route path="/gist/:id" component={Gist}/>
       <Route path="/logout" component={Logout}/>
       <Route path="/login" component={Login}/>
       <Route path="*" component={NoMatch}/>

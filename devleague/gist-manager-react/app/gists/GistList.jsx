@@ -7,8 +7,9 @@ import GistItem from './GistItem.jsx';
 const GistList = React.createClass({
   render: function() {
     var gistListNode = this.props.gistData.map(function(gistItemData){
+      console.log(gistItemData);
       return (
-        <GistItem key={gistItemData.id} >
+        <GistItem gist={gistItemData} key={gistItemData.id} >
           {gistItemData.description || 'GIST DESCRIPTION'}
         </GistItem>
       )

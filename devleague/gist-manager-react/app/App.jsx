@@ -40,10 +40,10 @@ export default React.createClass({
         <ul role="nav">
           <li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
           <li><NavLink to="/about">About</NavLink></li>
-          <li><NavLink to="/dashboard"
+          <li><NavLink to="/gists"
                 username={this.state.username}
                 token={this.state.token}
-              >Dashboard</NavLink>
+              >Gists</NavLink>
           </li>
             {this.state.loggedIn ? (
               <li><NavLink to="/logout">Logout</NavLink></li>
