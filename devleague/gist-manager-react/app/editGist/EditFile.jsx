@@ -8,14 +8,20 @@ const EditFile = React.createClass({
   render: function() {
     return (
       <div className='editFile'>
-        <li>
-          <h2>{ this.props.file.filename }</h2>
-          <div>{this.props.file.content}</div>
-        </li>
-        { this.props.children }
+        <label><input
+            ref="fileName"
+            placeholder="fileName"
+            defaultValue={this.props.file.filename}
+          /></label>
+          <label><input
+            ref="content"
+            placeholder="content"
+            defaultValue={this.props.file.content}
+          /></label>
       </div>
     )
   }
 });
 
 export default EditFile;
+

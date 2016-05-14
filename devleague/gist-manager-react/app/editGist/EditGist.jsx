@@ -74,6 +74,7 @@ export default React.createClass({
     });
     return (
       <div>
+        <button><Link to={"/gist/" + this.props.params.id}>back</Link></button>
         <h2>Edit Gist</h2>
         <p>{this.state.gist.description}</p>
         <form onSubmit={this.handleSubmit}>
@@ -82,10 +83,9 @@ export default React.createClass({
             placeholder="description"
             defaultValue="{this.state.gist.desctiption}"
           /></label>
+          { editFileNode }
           <button type="submit">Save</button>
         </form>
-        <button><Link to={"/gist/" + this.props.params.id}>back</Link></button>
-        { editFileNode }
       </div>
     )
   }
