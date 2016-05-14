@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import auth from '../shared/auth';
 import * as $ from'jquery';
+import auth from '../shared/auth';
+import EditFile from './EditFile.jsx';
 
 export default React.createClass({
   getInitialState() {
@@ -65,17 +66,26 @@ export default React.createClass({
 
   render() {
     console.log(this.state.gist, 'this.props')
+    const editFileNode = this.state.files.map(function(fileData){
+      console.log(fileData);
+      return (
+        <EditFile file={fileData} key={fileData.filename} ></EditFile>
+      )
+    });
     return (
       <div>
         <h2>Edit Gist</h2>
-        <p>{this.props.params.id}</p>
         <p>{this.state.gist.description}</p>
         <form onSubmit={this.handleSubmit}>
-          <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-          <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
-          <button type="submit">login</button>
+          <label><input
+            ref="description"
+            placeholder="description"
+            defaultValue="{this.state.gist.desctiption}"
+          /></label>
+          <button type="submit">Save</button>
         </form>
         <button><Link to={"/gist/" + this.props.params.id}>back</Link></button>
+        { editFileNode }
       </div>
     )
   }
