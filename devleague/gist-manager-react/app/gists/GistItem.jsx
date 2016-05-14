@@ -9,7 +9,7 @@ const GistItem = React.createClass({
     return (
       <div className='GistItem'>
         <li>
-          <Link to={"/gist/" + this.props.gist.id}>
+          <Link to={"/gist/" + this.props.gist.id} gist={this.props.gist}>
             { this.props.children }
           </Link>
         </li>
