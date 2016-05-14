@@ -24,7 +24,6 @@ export default React.createClass({
       },
       cache: false,
       success: function(data) {
-        console.log(data, 'dats')
         this.setState({ gist: data });
         let arr = Object.keys(data.files).map((k) => data.files[k]);
         this.setState({ files: arr });
@@ -49,7 +48,7 @@ export default React.createClass({
       <div>
         <h2>{this.props.params.id}</h2>
         <p>{this.state.gist.description}</p>
-        <button><Link to={'/gist/' + this.props.params.id + '/edit'}>Edit</Link></button>
+        <button><Link to={'/gist/' + this.props.params.id + '/edit'} files={this.state.files}>Edit</Link></button>
         <button><Link to={'/gists'}>All Gists</Link></button>
         { gistFileNode }
       </div>
