@@ -19,7 +19,7 @@ const Gists = React.createClass({
     }
   },
 
-  loadGistData: function() {
+  getAllGists: function() {
     $.ajax({
       url: "https://api.github.com/users/" + this.state.username + "/gists",
       dataType: 'json',
@@ -37,7 +37,7 @@ const Gists = React.createClass({
   },
 
   componentDidMount: function() {
-    this.loadGistData();
+    this.getAllGists();
   },
 
   render: function() {
