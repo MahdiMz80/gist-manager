@@ -48,8 +48,8 @@ export default React.createClass({
       <div>
         <h2>{this.props.params.id}</h2>
         <p>{this.state.gist.description}</p>
-        <button><Link to={'/gist/' + this.props.params.id + '/edit'} files={this.state.files}>Edit</Link></button>
         <button><Link to={'/gists'}>All Gists</Link></button>
+        <button><Link to={'/gist/' + this.props.params.id + '/edit'} files={this.state.files}>Edit</Link></button>
         { gistFileNode }
       </div>
     )

@@ -10,7 +10,7 @@ const File = React.createClass({
       <div className='File'>
         <li>
           <h2>{ this.props.file.filename }</h2>
-          <div>{this.props.file.content}</div>
+          <code>{this.props.file.content}</code>
         </li>
         { this.props.children }
       </div>

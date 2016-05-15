@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 'use strict';
 
 import React from 'react';
@@ -11,7 +12,9 @@ export default React.createClass({
     return {
       token: JSON.parse(auth.getToken()).token,
       gist: {},
-      files: []
+      description: '',
+      files: [],
+      newFiles:[]
     }
   },
 
@@ -28,8 +31,12 @@ export default React.createClass({
       },
       cache: false,
       success: function(data) {
-        this.setState({ gist: data });
-        this.setState({ files: this.objToArr(data.files) });
+        this.setState({
+          gist: data,
+          description: data.description,
+          files: this.objToArr(data.files),
+          newFiles: this.objToArr(data.files),
+        });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.params, status, err.toString());
@@ -37,12 +44,31 @@ export default React.createClass({
     });
   },
 
-  editGist() {
+  buildEditBody() {
+    var updatedGist = {
+      description : this.state.description,
+      files : {}
+    };
+
+    updatedGist.files = this.state.files.map((file)=> {
+      let newFile = {};
+      newFile[file.filename] =  {
+        content: file.content
+      }
+      return newFile
+    })[0];
+
+    console.log(updatedGist, 'UG');
+    return updatedGist;
+  },
+
+  handleEditGistSubmit(body) {
+    console.log(body, 'body')
     $.ajax({
       url: "https://api.github.com/gists/" + this.props.params.id,
       method: 'PATCH',
       dataType: 'json',
-      data: 'PUT THE REQUEST HERE',
+      data: JSON.stringify(body),
       headers: {
         'Authorization': 'token ' + this.state.token
       },
@@ -55,35 +81,55 @@ export default React.createClass({
       }.bind(this)
     });
   },
-
-  handleSubmit() {
-    this.editGist();
+  handleSubmit(e) {
+    e.preventDefault();
+    this.handleEditGistSubmit(this.buildEditBody());
   },
-
+  handleDescriptionChange(e) {
+    this.setState({ description: e.target.value });
+  },
+  handleFileNameChange(e) {
+    this.setState({ fileName: e.target.value });
+  },
+  handleContentChange(content, filename) {
+    for (var i = this.state.files.length - 1; i >= 0; i--) {
+      if (this.state.files[i].filename === filename) {
+        this.state.files[i].content = content;
+      }
+    }
+  },
   componentDidMount() {
     this.getGistData();
   },
-
   render() {
-    console.log(this.state.gist, 'this.props')
-    const editFileNode = this.state.files.map(function(fileData){
-      console.log(fileData);
+    const editFileNode = this.state.files.map(function(fileData) {
       return (
-        <EditFile file={fileData} key={fileData.filename} ></EditFile>
+        <EditFile
+          file={fileData}
+          onFileNameChange={this.handleFileNameChange}
+          onContentChange={this.handleContentChange}
+          key={fileData.filename}
+        />
       )
-    });
+    }.bind(this));
     return (
       <div>
-        <button><Link to={"/gist/" + this.props.params.id}>back</Link></button>
         <h2>Edit Gist</h2>
-        <p>{this.state.gist.description}</p>
+        <button><Link to={"/gist/" + this.props.params.id}>back</Link></button>
+        <button onClick={this.handleSubmit} >Save</button>
+        <p>{this.state.description}</p>
         <form onSubmit={this.handleSubmit}>
+          <span>Description</span>
           <label><input
-            ref="description"
-            placeholder="description"
-            defaultValue="{this.state.gist.desctiption}"
+            placeholder={this.state.description}
+            name="description"
+            id="description"
+            value={this.state.description}
+            defaultValue={this.state.description}
+            onChange={this.handleDescriptionChange}
           /></label>
           { editFileNode }
+          <button><Link to={"/gist/" + this.props.params.id}>back</Link></button>
           <button type="submit">Save</button>
         </form>
       </div>
