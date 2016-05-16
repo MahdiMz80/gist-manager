@@ -15,7 +15,7 @@ export default React.createClass({
     }
   },
 
-  getGistData: function() {
+  getGistData() {
     $.ajax({
       url: "https://api.github.com/gists/" + this.props.params.id,
       dataType: 'json',
@@ -34,22 +34,41 @@ export default React.createClass({
     });
   },
 
-  componentDidMount: function() {
+  handleDeleteGistSubmit(e) {
+    e.preventDefault();
+    $.ajax({
+      url: "https://api.github.com/gists/" + this.props.params.id,
+      method: 'DELETE',
+      dataType: 'json',
+      headers: {
+        'Authorization': 'token ' + this.state.token
+      },
+      cache: false,
+      success: function(data) {
+        console.log(data, 'SUCCESS');
+        window.location = "/gists";
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.gistId, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  componentDidMount() {
     this.getGistData();
   },
   render() {
     const gistFileNode = this.state.files.map(function(fileData){
-      console.log(fileData);
       return (
         <File file={fileData} key={fileData.filename} ></File>
       )
     });
     return (
       <div>
-        <h2>{this.props.params.id}</h2>
         <p>{this.state.gist.description}</p>
         <button><Link to={'/gists'}>All Gists</Link></button>
         <button><Link to={'/gist/' + this.props.params.id + '/edit'} files={this.state.files}>Edit</Link></button>
+        <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
         { gistFileNode }
       </div>
     )
