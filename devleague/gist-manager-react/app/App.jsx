@@ -42,7 +42,6 @@ export default React.createClass({
           <a className="header--logo">Gist Manager</a>
           <ul className="header--nav">
             <li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
-            <li><NavLink to="/about">About</NavLink></li>
             {this.state.loggedIn ? (
               <li><NavLink to="/gists"
                   username={this.state.username}
