@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import * as $ from'jquery';
 import auth from '../../shared/auth';
 import NewFile from './NewFile.jsx';
+import styles from './NewGist.scss';
 
 export default React.createClass({
   getInitialState() {
@@ -115,10 +116,16 @@ export default React.createClass({
     return (
       <div>
         <h2>New Gist</h2>
-        <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
-        <button onClick={this.handleAddFile}>Add File</button>
-        <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
-        <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>
+        <div className="new-btns">
+          <div className="cancel-add-file-btns">
+            <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
+            <button onClick={this.handleAddFile}>Add File</button>
+          </div>
+          <div className="create-public-private-btns">
+            <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
+            <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>
+          </div>
+        </div>
         <form>
           <label for="description">Description</label>
           <input
@@ -132,10 +139,17 @@ export default React.createClass({
             onChange={this.handleDescriptionChange}
           />
           { editFileNode }
-          <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
-          <button onClick={this.handleAddFile}>Add File</button>
-          <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
-          <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>
+
+          <div className="new-btns">
+            <div className="cancel-add-file-btns">
+              <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
+              <button onClick={this.handleAddFile}>Add File</button>
+            </div>
+            <div className="create-public-private-btns">
+              <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
+              <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>
+            </div>
+          </div>
         </form>
       </div>
     )

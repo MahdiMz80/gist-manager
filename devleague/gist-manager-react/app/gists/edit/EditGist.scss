@@ -1,0 +1,11 @@
+.edit-btns {
+  display: flex;
+  .cancel-save-btns {
+    flex: 1 0 auto;
+    order: 10;
+  }
+  .add-delte-btns {
+    flex: 0 1 auto;
+    order: 20;
+  }
+}

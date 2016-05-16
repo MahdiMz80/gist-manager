@@ -10,6 +10,7 @@ $red: tomato;
 }
 
 .content {
+  padding-top: 2%;
   flex: 1;
 }
 
@@ -43,6 +44,7 @@ ul {
 
 .header--logo {
   padding: .5rem 1rem;
+  padding-left: 5%;
   flex: 1 0 auto;
   order: 10;
   font-weight: 200;
@@ -50,6 +52,7 @@ ul {
 }
 
 .header--nav {
+  padding-right: 5%;
   flex: 0 1 auto;
   order: 20;
 }

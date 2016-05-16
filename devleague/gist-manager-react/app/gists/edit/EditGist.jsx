@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import * as $ from'jquery';
 import auth from '../../shared/auth';
 import EditFile from './EditFile.jsx';
+import styles from './EditGist.scss';
 
 export default React.createClass({
   getInitialState() {
@@ -160,12 +161,12 @@ export default React.createClass({
     return (
       <div>
         <h2>Edit Gist</h2>
-        <div class="row">
-          <div className="one-half column u-pull-left">
+        <div className="edit-btns">
+          <div className="cancel-save-btns">
             <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
             <button onClick={this.handleSubmit}>Save</button>
           </div>
-          <div className="one-half column u-pull-right">
+          <div className="add-delte-btns">
             <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
             <button onClick={this.handleAddFile}>Add File</button>
           </div>
@@ -183,9 +184,16 @@ export default React.createClass({
             onChange={this.handleDescriptionChange}
           />
           { editFileNode }
-          <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
-          <button onClick={this.handleSubmit}>Save</button>
-          <button onClick={this.handleAddFile}>Add File</button>
+          <div className="edit-btns">
+            <div className="cancel-save-btns">
+              <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
+              <button onClick={this.handleSubmit}>Save</button>
+            </div>
+            <div className="add-delte-btns">
+              <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
+              <button onClick={this.handleAddFile}>Add File</button>
+            </div>
+          </div>
         </form>
       </div>
     )

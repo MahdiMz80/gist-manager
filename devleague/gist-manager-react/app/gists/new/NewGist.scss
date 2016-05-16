@@ -1,0 +1,11 @@
+.new-btns {
+  display: flex;
+  .cancel-add-file-btns {
+    flex: 1 0 auto;
+    order: 10;
+  }
+  .create-public-private-btns {
+    flex: 0 1 auto;
+    order: 20;
+  }
+}
