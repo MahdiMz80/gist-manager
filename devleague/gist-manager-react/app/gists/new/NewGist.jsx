@@ -4,7 +4,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import * as $ from'jquery';
-import auth from '../shared/auth';
+import auth from '../../shared/auth';
 import NewFile from './NewFile.jsx';
 
 export default React.createClass({
@@ -38,7 +38,6 @@ export default React.createClass({
     return updatedGist;
   },
   handleNewGistSubmit(body) {
-    console.log(body)
     $.ajax({
       url: "https://api.github.com/gists",
       method: 'POST',

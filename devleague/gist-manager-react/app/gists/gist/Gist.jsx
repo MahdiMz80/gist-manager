@@ -1,7 +1,8 @@
+/* jshint esversion: 6 */
 'use strict';
 
 import React from 'react';
-import auth from '../shared/auth';
+import auth from '../../shared/auth';
 import File from './File.jsx';
 import * as $ from'jquery';
 import { Link } from 'react-router';

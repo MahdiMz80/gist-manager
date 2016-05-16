@@ -4,7 +4,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import * as $ from'jquery';
-import auth from '../shared/auth';
+import auth from '../../shared/auth';
 import EditFile from './EditFile.jsx';
 
 export default React.createClass({

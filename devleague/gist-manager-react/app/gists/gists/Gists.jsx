@@ -4,7 +4,7 @@
 import React from 'react';
 import GistList from './GistList.jsx';
 import styles from './Gists.css';
-import auth from '../shared/auth';
+import auth from '../../shared/auth';
 import * as $ from'jquery';
 
 const Gists = React.createClass({
