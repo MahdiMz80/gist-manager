@@ -14,12 +14,19 @@ export default React.createClass({
       gist: {},
       description: '',
       files: [],
-      newFiles:[]
     }
   },
 
   objToArr(obj) {
     return Object.keys(obj).map((k) => obj[k])
+  },
+
+  initializeFileArr(files){
+    let initFiles = this.objToArr(files)
+    initFiles.map((file) => {
+      return file.originalFileName = file.filename;
+    });
+    return initFiles;
   },
 
   getGistData() {
@@ -34,9 +41,8 @@ export default React.createClass({
         this.setState({
           gist: data,
           description: data.description,
-          files: this.objToArr(data.files),
-          newFiles: this.objToArr(data.files),
-        });
+          files: this.initializeFileArr(data.files),
+        })
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.params, status, err.toString());
@@ -49,21 +55,18 @@ export default React.createClass({
       description : this.state.description,
       files : {}
     };
-
     updatedGist.files = this.state.files.map((file)=> {
       let newFile = {};
-      newFile[file.filename] =  {
+      newFile[file.originalFileName] =  {
+        filename: file.filename,
         content: file.content
       }
-      return newFile
+      return newFile;
     })[0];
-
-    console.log(updatedGist, 'UG');
     return updatedGist;
   },
 
   handleEditGistSubmit(body) {
-    console.log(body, 'body')
     $.ajax({
       url: "https://api.github.com/gists/" + this.props.params.id,
       method: 'PATCH',
@@ -88,8 +91,12 @@ export default React.createClass({
   handleDescriptionChange(e) {
     this.setState({ description: e.target.value });
   },
-  handleFileNameChange(e) {
-    this.setState({ fileName: e.target.value });
+  handleFileNameChange(newFileName, originalFileName) {
+    for (var i = this.state.files.length - 1; i >= 0; i--) {
+      if (this.state.files[i].originalFileName === originalFileName) {
+        this.state.files[i].filename = newFileName;
+      }
+    }
   },
   handleContentChange(content, filename) {
     for (var i = this.state.files.length - 1; i >= 0; i--) {
@@ -108,7 +115,7 @@ export default React.createClass({
           file={fileData}
           onFileNameChange={this.handleFileNameChange}
           onContentChange={this.handleContentChange}
-          key={fileData.filename}
+          key={fileData.filename + Math.random()*100000}
         />
       )
     }.bind(this));

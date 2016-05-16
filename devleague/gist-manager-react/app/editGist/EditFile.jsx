@@ -8,34 +8,32 @@ const EditFile = React.createClass({
   getInitialState() {
     return {
       originalFileName: this.props.file.filename,
-      fileName: this.props.file.filename,
+      newFileName: this.props.file.filename,
       content : this.props.file.content
     }
   },
 
   handleFileNameChange(e) {
-    this.setState({ fileName: e.target.value });
-    // console.log(this.state.fileName, 'this.state.fileName');
-    this.props.onFileNameChange(this.state.fileName);
+    this.setState({ newFileName: e.target.value });
+    this.props.onFileNameChange(this.state.newFileName, this.state.originalFileName);
   },
 
   handleContentChange(e) {
     this.setState({ content: e.target.value });
-    // console.log(this.state.content, 'this.state.content')
     this.props.onContentChange(this.state.content, this.state.originalFileName);
   },
 
   render: function() {
     return (
       <div className='editFile'>
-        <h3>{this.props.file.filename}</h3>
+        <h3>{this.props.file.originalFileName}</h3>
         <div>File Name</div>
         <div>
           <label><input
               ref="fileName"
               placeholder={this.props.file.filename}
               defaultValue={this.props.file.filename}
-              value={this.state.filename}
+              value={this.state.newFileName}
               onChange={this.handleFileNameChange}
             /></label>
         </div>
