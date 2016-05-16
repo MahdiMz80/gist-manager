@@ -7,7 +7,7 @@ import * as $ from'jquery';
 import auth from '../shared/auth';
 
 
-const EditFile = React.createClass({
+const NewFile = React.createClass({
   getInitialState() {
     return {
       token: JSON.parse(auth.getToken()).token,
@@ -17,32 +17,8 @@ const EditFile = React.createClass({
     }
   },
 
-  handleDeleteFileSubmit(e) {
-    e.preventDefault();
-    var deleteFile = {
-      description: this.props.description,
-      files: {}
-    };
-    let file = {};
-    file[this.props.file.filename] = null;
-    deleteFile.files = file;
-    $.ajax({
-      url: "https://api.github.com/gists/" + this.props.gistId,
-      method: 'PATCH',
-      dataType: 'json',
-      data: JSON.stringify(deleteFile),
-      headers: {
-        'Authorization': 'token ' + this.state.token
-      },
-      cache: false,
-      success: function(data) {
-        console.log(data, 'SUCCESS');
-        this.props.onFileDelete(this.state.originalFileName);
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.gistId, status, err.toString());
-      }.bind(this)
-    });
+  handleDeleteFileSubmit() {
+    this.props.onFileDelete(this.state.originalFileName);
   },
 
   handleFileNameChange(e) {
@@ -89,5 +65,5 @@ const EditFile = React.createClass({
   }
 });
 
-export default EditFile;
+export default NewFile;
 

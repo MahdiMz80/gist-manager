@@ -5,66 +5,41 @@ import React from 'react';
 import { Link } from 'react-router';
 import * as $ from'jquery';
 import auth from '../shared/auth';
-import EditFile from './EditFile.jsx';
+import NewFile from './NewFile.jsx';
 
 export default React.createClass({
   getInitialState() {
+    let filename = 'newFile'+ Math.floor(Math.random()*100) + '.txt';
     return {
       token: JSON.parse(auth.getToken()).token,
-      gist: {},
-      description: '',
-      files: [],
+      description: 'The description for this gist',
+      files: [{
+        filename: filename,
+        originalFileName: filename,
+        content: 'Add your content here'
+      }]
     }
   },
-  objToArr(obj) {
-    return Object.keys(obj).map((k) => obj[k])
-  },
-  initializeFileArr(files){
-    let initFiles = this.objToArr(files)
-    initFiles.map((file) => {
-      return file.originalFileName = file.filename;
-    });
-    return initFiles;
-  },
-  getGistData() {
-    $.ajax({
-      url: "https://api.github.com/gists/" + this.props.params.id,
-      dataType: 'json',
-      headers: {
-        'Authorization': 'token ' + this.state.token
-      },
-      cache: false,
-      success: function(data) {
-        this.setState({
-          gist: data,
-          description: data.description,
-          files: this.initializeFileArr(data.files),
-        })
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.params, status, err.toString());
-      }.bind(this)
-    });
-  },
-  buildEditBody() {
+  buildNewGist(isPublic) {
     var updatedGist = {
       description : this.state.description,
+      public: isPublic,
       files : {}
     };
     updatedGist.files = this.state.files.map((file)=> {
       let newFile = {};
-      newFile[file.originalFileName] =  {
-        filename: file.filename,
+      newFile[file.filename] =  {
         content: file.content
       }
       return newFile;
     })[0];
     return updatedGist;
   },
-  handleEditGistSubmit(body) {
+  handleNewGistSubmit(body) {
+    console.log(body)
     $.ajax({
-      url: "https://api.github.com/gists/" + this.props.params.id,
-      method: 'PATCH',
+      url: "https://api.github.com/gists",
+      method: 'POST',
       dataType: 'json',
       data: JSON.stringify(body),
       headers: {
@@ -79,33 +54,14 @@ export default React.createClass({
       }.bind(this)
     });
   },
-  handleDeleteGistSubmit(e) {
-    e.preventDefault();
-    $.ajax({
-      url: "https://api.github.com/gists/" + this.props.params.id,
-      method: 'DELETE',
-      dataType: 'json',
-      headers: {
-        'Authorization': 'token ' + this.state.token
-      },
-      cache: false,
-      success: function(data) {
-        console.log(data, 'SUCCESS');
-        window.location = "/gists";
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.gistId, status, err.toString());
-      }.bind(this)
-    });
-  },
   handleSubmit(e) {
     e.preventDefault();
-    this.handleEditGistSubmit(this.buildEditBody());
+    this.handleNewGistSubmit(this.buildNewGist(true));
   },
   handleAddFile(e) {
     e.preventDefault();
     let newFile = {};
-    newFile.filename = 'newFile.txt';
+    newFile.filename = 'newFile'+ Math.floor(Math.random()*100) + '.txt';
     newFile.content = 'Add your content here';
     this.state.files.push(newFile);
     this.setState({files: this.state.files});
@@ -136,28 +92,23 @@ export default React.createClass({
     }
     this.setState({files: updatedFiles});
   },
-  componentDidMount() {
-    this.getGistData();
-  },
   render() {
     const editFileNode = this.state.files.map(function(fileData) {
       return (
-        <EditFile
+        <NewFile
           file={fileData}
           onFileNameChange={this.handleFileNameChange}
           onContentChange={this.handleContentChange}
           onFileDelete={this.handleFileDelete}
-          gistId={this.props.params.id}
           key={fileData.filename + Math.random()*100000}
         />
       )
     }.bind(this));
     return (
       <div>
-        <h2>Edit Gist</h2>
+        <h2>New Gist</h2>
         <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
-        <button onClick={this.handleSubmit}>Save</button>
-        <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
+        <button onClick={this.handleSubmit}>Create Public Gist</button>
         <button onClick={this.handleAddFile}>Add File</button>
         <p>{this.state.description}</p>
         <form>
@@ -172,7 +123,7 @@ export default React.createClass({
           /></label>
           { editFileNode }
           <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
-          <button onClick={this.handleSubmit}>Save</button>
+          <button onClick={this.handleSubmit}>Create Public Gist</button>
           <button onClick={this.handleAddFile}>Add File</button>
         </form>
       </div>

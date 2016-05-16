@@ -40,16 +40,25 @@ export default React.createClass({
         <ul role="nav">
           <li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
           <li><NavLink to="/about">About</NavLink></li>
-          <li><NavLink to="/gists"
+          {this.state.loggedIn ? (
+            <li><NavLink to="/gists"
                 username={this.state.username}
                 token={this.state.token}
               >Gists</NavLink>
           </li>
-            {this.state.loggedIn ? (
-              <li><NavLink to="/logout">Logout</NavLink></li>
-            ) : (
-              <li><a href="/auth/github">Login</a></li>
-            )}
+          ) : (
+            undefined
+          )}
+          {this.state.loggedIn ? (
+            <li><NavLink to="/new">New Gist</NavLink></li>
+          ) : (
+            undefined
+          )}
+          {this.state.loggedIn ? (
+            <li><NavLink to="/logout">Logout</NavLink></li>
+          ) : (
+            <li><a href="/auth/github">Login</a></li>
+          )}
         </ul>
           {
             this.props.children || <Home/>

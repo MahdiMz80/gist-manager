@@ -9,6 +9,7 @@ import Home from './home/Home.jsx';
 import Gists from './gists/Gists.jsx';
 import Gist from './gist/Gist.jsx';
 import EditGist from './editGist/EditGist.jsx';
+import NewGist from './newGist/NewGist.jsx';
 import About from './about/About.jsx';
 import Logout from './shared/Logout.jsx';
 import Login from './shared/Login.jsx';
@@ -32,6 +33,7 @@ ReactDOM.render(
       <Route path="/gists" component={Gists} onEnter={requireAuth}/>
       <Route path="/gist/:id" component={Gist} onEnter={requireAuth}/>
         <Route path="/gist/:id/edit" component={EditGist} onEnter={requireAuth}/>
+      <Route path="/new" component={NewGist} onEnter={requireAuth}/>
       <Route path="/logout" component={Logout}/>
       <Route path="/login" component={Login}/>
       <Route path="*" component={NoMatch}/>
