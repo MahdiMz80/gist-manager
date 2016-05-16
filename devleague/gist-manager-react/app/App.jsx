@@ -72,7 +72,7 @@ export default React.createClass({
 
         <footer className="footer">
           <div className="footer-content">
-            <p>Site by Joe.</p>
+            <a href='http://www.callmejoe.net/'><p>Site by Joe.</p></a>
           </div>
         </footer>
       </div>

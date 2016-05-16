@@ -102,7 +102,7 @@ export default React.createClass({
     this.setState({files: updatedFiles});
   },
   render() {
-    const editFileNode = this.state.files.map(function(fileData) {
+    const newFileNode = this.state.files.map(function(fileData) {
       return (
         <NewFile
           file={fileData}
@@ -138,7 +138,7 @@ export default React.createClass({
             defaultValue={this.state.description}
             onChange={this.handleDescriptionChange}
           />
-          { editFileNode }
+          { newFileNode }
 
           <div className="new-btns">
             <div className="cancel-add-file-btns">
