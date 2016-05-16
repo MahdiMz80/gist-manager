@@ -37,7 +37,7 @@ export default React.createClass({
 
   render() {
     return (
-      <div>
+      <div className="site">
         <header>
           <a className="header--logo">Gist Manager</a>
           <ul className="header--nav">
