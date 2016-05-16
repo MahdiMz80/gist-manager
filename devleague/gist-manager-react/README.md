@@ -3,7 +3,7 @@ A GitHub Gist manager built using React JS
 =====================
 
 ## Introduction
-Build a web app that allows people to manage their Github Gists all from one place. Your web app should be able to add, edit and delete Gists stored on their Github account. Your application will be a client side application using the Github API in order to persist data to the users
+Gist Manager allows people to manage their Github Gists all from one place. This web app allows people to add, edit and delete Gists stored on their Github account.
 
 ## Install and Running
 **NOTE!** Use the latest version of Node, 4.x.x.
