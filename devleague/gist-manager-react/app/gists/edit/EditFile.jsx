@@ -5,6 +5,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import * as $ from'jquery';
 import auth from '../../shared/auth';
+import styles from './EditFile.scss';
 
 const EditFile = React.createClass({
   getInitialState() {

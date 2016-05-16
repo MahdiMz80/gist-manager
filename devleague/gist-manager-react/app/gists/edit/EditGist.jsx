@@ -160,10 +160,16 @@ export default React.createClass({
     return (
       <div>
         <h2>Edit Gist</h2>
-        <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
-        <button onClick={this.handleSubmit}>Save</button>
-        <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
-        <button onClick={this.handleAddFile}>Add File</button>
+        <div class="row">
+          <div className="one-half column u-pull-left">
+            <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
+            <button onClick={this.handleSubmit}>Save</button>
+          </div>
+          <div className="one-half column u-pull-right">
+            <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
+            <button onClick={this.handleAddFile}>Add File</button>
+          </div>
+        </div>
         <form>
           <label for="description">Description</label>
           <input
