@@ -6,6 +6,8 @@ import NavLink from './navigation/NavLink.jsx';
 import Logout from './shared/Logout.jsx';
 import Home from './home/Home.jsx';
 import auth from './shared/auth';
+import styles from './App.scss';
+
 
 export default React.createClass({
   getInitialState() {
@@ -36,33 +38,37 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <h1>Gist Manager</h1>
-        <ul role="nav">
-          <li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
-          <li><NavLink to="/about">About</NavLink></li>
-          {this.state.loggedIn ? (
-            <li><NavLink to="/gists"
-                username={this.state.username}
-                token={this.state.token}
-              >Gists</NavLink>
-          </li>
-          ) : (
-            undefined
-          )}
-          {this.state.loggedIn ? (
-            <li><NavLink to="/new">New Gist</NavLink></li>
-          ) : (
-            undefined
-          )}
-          {this.state.loggedIn ? (
-            <li><NavLink to="/logout">Logout</NavLink></li>
-          ) : (
-            <li><a href="/auth/github">Login</a></li>
-          )}
-        </ul>
-          {
-            this.props.children || <Home/>
-          }
+        <header className={styles.header}>
+          <h1>Gist Manager</h1>
+          <ul role="nav">
+            <li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
+            <li><NavLink to="/about">About</NavLink></li>
+            {this.state.loggedIn ? (
+              <li><NavLink to="/gists"
+                  username={this.state.username}
+                  token={this.state.token}
+                >Gists</NavLink>
+            </li>
+            ) : (
+              undefined
+            )}
+            {this.state.loggedIn ? (
+              <li><NavLink to="/new">New Gist</NavLink></li>
+            ) : (
+              undefined
+            )}
+            {this.state.loggedIn ? (
+              <li><NavLink to="/logout">Logout</NavLink></li>
+            ) : (
+              <li><a href="/auth/github">Login</a></li>
+            )}
+          </ul>
+        </header>
+          <div className="container">
+            {
+                this.props.children || <Home/>
+            }
+          </div>
       </div>
     )
   }

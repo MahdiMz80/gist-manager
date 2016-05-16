@@ -56,33 +56,39 @@ const EditFile = React.createClass({
 
   render: function() {
     return (
-      <div className='editFile'>
-        <h3>{this.props.file.originalFileName}</h3>
-        <div>File Name</div>
+      <div className='editFile row'>
         <div>
-          <label><input
-              ref="fileName"
-              placeholder={this.props.file.filename}
-              defaultValue={this.props.file.filename}
-              value={this.state.newFileName}
-              onChange={this.handleFileNameChange}
-            /></label>
-        </div>
-        <br></br>
-        <div>
-          <div>Content</div>
-          <label><textarea
-            rows="15"
-            cols="150"
-            ref="content"
-            placeholder={this.props.file.content}
-            defaultValue={this.props.file.content}
-            value={this.state.content}
-            onChange={this.handleContentChange}
-          /></label>
-        </div>
-        <button onClick={this.handleDeleteFileSubmit} >Delete</button>
+          <h3>{this.props.file.originalFileName}</h3>
+          <div>
+            <label for="filename">File Name</label>
+            <input
+                ref="fileName"
+                type='text'
+                id='fileName'
+                className="u-full-width"
+                placeholder={this.props.file.filename}
+                defaultValue={this.props.file.filename}
+                value={this.state.newFileName}
+                onChange={this.handleFileNameChange}
+              />
+          </div>
+          <br></br>
+          <div>
+            <label for="content">Content</label>
+            <textarea
+              ref="content"
+              type='text'
+              id='content'
+              className="u-full-width"
+              placeholder={this.props.file.content}
+              defaultValue={this.props.file.content}
+              value={this.state.content}
+              onChange={this.handleContentChange}
+            />
+          </div>
+          <button onClick={this.handleDeleteFileSubmit} >Delete</button>
         <hr></hr>
+        </div>
       </div>
     )
   }

@@ -32,33 +32,39 @@ const NewFile = React.createClass({
 
   render: function() {
     return (
-      <div className='editFile'>
-        <h3>{this.props.file.originalFileName}</h3>
-        <div>File Name</div>
+      <div className='editFile row'>
         <div>
-          <label><input
-              ref="fileName"
-              placeholder={this.props.file.filename}
-              defaultValue={this.props.file.filename}
-              value={this.state.newFileName}
-              onChange={this.handleFileNameChange}
-            /></label>
-        </div>
-        <br></br>
-        <div>
-          <div>Content</div>
-          <label><textarea
-            rows="15"
-            cols="150"
-            ref="content"
-            placeholder={this.props.file.content}
-            defaultValue={this.props.file.content}
-            value={this.state.content}
-            onChange={this.handleContentChange}
-          /></label>
-        </div>
-        <button onClick={this.handleDeleteFileSubmit} >Delete</button>
+          <h3>{this.props.file.originalFileName}</h3>
+          <div>
+            <label for="filename">File Name</label>
+            <input
+                ref="fileName"
+                type='text'
+                id='fileName'
+                className="u-full-width"
+                placeholder={this.props.file.filename}
+                defaultValue={this.props.file.filename}
+                value={this.state.newFileName}
+                onChange={this.handleFileNameChange}
+              />
+          </div>
+          <br></br>
+          <div>
+            <label for="content">Content</label>
+            <textarea
+              ref="content"
+              type='text'
+              id='content'
+              className="u-full-width"
+              placeholder={this.props.file.content}
+              defaultValue={this.props.file.content}
+              value={this.state.content}
+              onChange={this.handleContentChange}
+            />
+          </div>
+          <button onClick={this.handleDeleteFileSubmit} >Delete</button>
         <hr></hr>
+        </div>
       </div>
     )
   }
@@ -66,3 +72,26 @@ const NewFile = React.createClass({
 
 export default NewFile;
 
+// <form>
+//   <div class="row">
+//     <div class="six columns">
+//       <label for="exampleEmailInput">Your email</label>
+//       <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
+//     </div>
+//     <div class="six columns">
+//       <label for="exampleRecipientInput">Reason for contacting</label>
+//       <select class="u-full-width" id="exampleRecipientInput">
+//         <option value="Option 1">Questions</option>
+//         <option value="Option 2">Admiration</option>
+//         <option value="Option 3">Can I get your number?</option>
+//       </select>
+//     </div>
+//   </div>
+//   <label for="exampleMessage">Message</label>
+//   <textarea class="u-full-width" placeholder="Hi Dave …" id="exampleMessage"></textarea>
+//   <label class="example-send-yourself-copy">
+//     <input type="checkbox">
+//     <span class="label-body">Send a copy to yourself</span>
+//   </label>
+//   <input class="button-primary" type="submit" value="Submit">
+// </form>

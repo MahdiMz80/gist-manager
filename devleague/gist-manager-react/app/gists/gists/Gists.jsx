@@ -3,7 +3,7 @@
 
 import React from 'react';
 import GistList from './GistList.jsx';
-import styles from './Gists.css';
+import styles from './Gists.scss';
 import auth from '../../shared/auth';
 import * as $ from'jquery';
 
@@ -42,7 +42,7 @@ const Gists = React.createClass({
 
   render: function() {
     return (
-      <div className={styles.dashboard}>
+      <div className={styles.gistList}>
         <h1>GitHub Gist Manager Dashboard</h1>
         <GistList gistData={this.state.gists} />
       </div>
