@@ -69,7 +69,13 @@ export default React.createClass({
     }.bind(this));
     return (
       <div>
-        <h2>Instantly share code, notes, and snippets.</h2>
+        <div className="section header">
+          <div className="container">
+            <h2 className="section-heading">Instantly share code, notes, and snippets.</h2>
+            <Link to={'/login'}><button className="button button-primary">Let's get started</button></Link>
+          </div>
+        </div>
+
         <div className="new-btns">
           <div className="cancel-add-file-btns">
             <button onClick={this.handleAddFile}>Add File</button>

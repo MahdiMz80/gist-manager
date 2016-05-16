@@ -3,15 +3,17 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-const $ = require('jquery');
-const githubUrl = '/auth/github';
+import styles from './Login.scss';
 
 export default React.createClass({
 
   render() {
     return (
-      <div>
-        <a href="/auth/github"><button>Login with Github</button></a>
+      <div className="section header">
+        <div className="container">
+          <h2 className="section-heading">Let's get started</h2>
+          <a href="/auth/github"><button>Login with Github</button></a>
+        </div>
       </div>
     )
   }
