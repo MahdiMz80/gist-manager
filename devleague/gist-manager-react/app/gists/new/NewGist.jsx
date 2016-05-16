@@ -115,7 +115,7 @@ export default React.createClass({
     return (
       <div>
         <h2>New Gist</h2>
-        <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
+        <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
         <button onClick={this.handleAddFile}>Add File</button>
         <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
         <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>
@@ -132,7 +132,7 @@ export default React.createClass({
             onChange={this.handleDescriptionChange}
           />
           { editFileNode }
-          <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
+          <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
           <button onClick={this.handleAddFile}>Add File</button>
           <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
           <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>

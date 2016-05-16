@@ -160,7 +160,7 @@ export default React.createClass({
     return (
       <div>
         <h2>Edit Gist</h2>
-        <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
+        <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
         <button onClick={this.handleSubmit}>Save</button>
         <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
         <button onClick={this.handleAddFile}>Add File</button>
@@ -177,7 +177,7 @@ export default React.createClass({
             onChange={this.handleDescriptionChange}
           />
           { editFileNode }
-          <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
+          <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
           <button onClick={this.handleSubmit}>Save</button>
           <button onClick={this.handleAddFile}>Add File</button>
         </form>

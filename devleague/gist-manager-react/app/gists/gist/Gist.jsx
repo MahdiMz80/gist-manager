@@ -67,8 +67,8 @@ export default React.createClass({
     return (
       <div>
         <p>{this.state.gist.description}</p>
-        <button><Link to={'/gists'}>All Gists</Link></button>
-        <button><Link to={'/gist/' + this.props.params.id + '/edit'} files={this.state.files}>Edit</Link></button>
+        <Link to={'/gists'}><button>All Gists</button></Link>
+        <Link to={'/gist/' + this.props.params.id + '/edit'} files={this.state.files}><button>Edit</button></Link>
         <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
         { gistFileNode }
       </div>
