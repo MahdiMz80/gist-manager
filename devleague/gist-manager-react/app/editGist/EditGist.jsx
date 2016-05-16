@@ -46,7 +46,7 @@ export default React.createClass({
       }.bind(this)
     });
   },
-  buildNewGist() {
+  buildEditBody() {
     var updatedGist = {
       description : this.state.description,
       files : {}
@@ -109,7 +109,9 @@ export default React.createClass({
   handleAddFile(e) {
     e.preventDefault();
     let newFile = {};
-    newFile.filename = 'newFile.txt';
+    let fileName = 'newFile'+ Math.floor(Math.random()*100) + '.txt';
+    newFile.filename = fileName;
+    newFile.originalFileName = fileName;
     newFile.content = 'Add your content here';
     this.state.files.push(newFile);
     this.setState({files: this.state.files});

@@ -32,7 +32,6 @@ export default React.createClass({
       newFile =  {
         content: this.state.files[i].content
       };
-      console.log(newFile, 'newFile');
       files[this.state.files[i].filename] = newFile;
     }
     updatedGist.files = files;
@@ -74,7 +73,6 @@ export default React.createClass({
     newFile.originalFileName = fileName;
     newFile.content = 'Add your content here';
     this.state.files.push(newFile);
-    console.log(this.state.files, 'this.state.files')
     this.setState({files: this.state.files});
   },
   handleDescriptionChange(e) {
