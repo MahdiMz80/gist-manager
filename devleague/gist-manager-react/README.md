@@ -1,27 +1,16 @@
-# webpack-express-boilerplate
-A boilerplate for running a Webpack workflow in Node express
+# Gist-Manager
+A GitHub Gist manager built using React JS
+=====================
 
-Please read the following article: [The ultimate Webpack setup](http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup) to know more about this boilerplate.
-
-## Major update to project
-Inspired by [this project](https://github.com/vesparny/react-kickstart) and the evolving of [react-transform](https://github.com/gaearon/react-transform-boilerplate) and [CSS Modules]((http://glenmaddern.com/articles/css-modules)), this project has gotten a major upgrade.
-
-**NOTE!** Use the latest version of Node, 4.x.x.
+## Introduction
+Build a web app that allows people to manage their Github Gists all from one place. Your web app should be able to add, edit and delete Gists stored on their Github account. Your application will be a client side application using the Github API in order to persist data to the users
 
 ## Install and Running
-`git clone https://github.com/christianalfoni/webpack-express-boilerplate.git`
-
-or just export the files:
-
-`svn export https://github.com/christianalfoni/webpack-express-boilerplate/trunk ./dir`
-
-1. cd webpack-express-boilerplate
+**NOTE!** Use the latest version of Node, 4.x.x.
+1. cd gist-manager
 2. npm install
 3. npm start
 4. navigate to http://localhost:3000 in your browser of choice.
-
-
-## Overview
 
 ### React by default
 The project runs with React by default and hot replacement of changes to the modules. Currently it is on 0.14.3.
