@@ -26,13 +26,16 @@ export default React.createClass({
       public: isPublic,
       files : {}
     };
-    updatedGist.files = this.state.files.map((file)=> {
+    let files = {};
+    for (var i = 0; i < this.state.files.length; i++) {
       let newFile = {};
-      newFile[file.filename] =  {
-        content: file.content
-      }
-      return newFile;
-    })[0];
+      newFile =  {
+        content: this.state.files[i].content
+      };
+      console.log(newFile, 'newFile');
+      files[this.state.files[i].filename] = newFile;
+    }
+    updatedGist.files = files;
     return updatedGist;
   },
   handleNewGistSubmit(body) {
@@ -61,9 +64,12 @@ export default React.createClass({
   handleAddFile(e) {
     e.preventDefault();
     let newFile = {};
-    newFile.filename = 'newFile'+ Math.floor(Math.random()*100) + '.txt';
+    let fileName = 'newFile'+ Math.floor(Math.random()*100) + '.txt';
+    newFile.filename = fileName;
+    newFile.originalFileName = fileName;
     newFile.content = 'Add your content here';
     this.state.files.push(newFile);
+    console.log(this.state.files, 'this.state.files')
     this.setState({files: this.state.files});
   },
   handleDescriptionChange(e) {
