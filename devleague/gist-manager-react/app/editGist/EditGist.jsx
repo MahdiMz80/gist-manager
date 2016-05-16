@@ -105,7 +105,6 @@ export default React.createClass({
     for (var i = updatedFiles.length - 1; i >= 0; i--) {
       if (updatedFiles[i].filename === filename) {
         updatedFiles.splice(i, 1);
-        console.log(updatedFiles, 'splice')
       }
     }
     this.setState({files: updatedFiles});
@@ -118,7 +117,6 @@ export default React.createClass({
       return (
         <EditFile
           file={fileData}
-          description={this.state.description}
           onFileNameChange={this.handleFileNameChange}
           onContentChange={this.handleContentChange}
           onFileDelete={this.handleFileDelete}

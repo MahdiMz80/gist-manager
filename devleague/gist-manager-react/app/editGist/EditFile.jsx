@@ -18,18 +18,10 @@ const EditFile = React.createClass({
   },
 
   handleDeleteFileSubmit() {
-    var deleteFile = {
-      description: this.props.description,
-      files: {}
-    };
-    let file = {};
-    file[this.props.file.filename] = null;
-    deleteFile.files = file;
     $.ajax({
       url: "https://api.github.com/gists/" + this.props.gistId,
-      method: 'PATCH',
+      method: 'DELETE',
       dataType: 'json',
-      data: JSON.stringify(deleteFile),
       headers: {
         'Authorization': 'token ' + this.state.token
       },
