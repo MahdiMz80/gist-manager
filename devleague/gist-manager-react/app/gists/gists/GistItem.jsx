@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import styles from './GistItem.scss';
 
 const GistItem = React.createClass({
   render: function() {
@@ -11,7 +12,11 @@ const GistItem = React.createClass({
       <div className='GistItem'>
         <li>
           <div>
-            <Link to={"/gist/" + this.props.gist.id} gist={this.props.gist}>
+            <Link
+              className='gist-description'
+              to={"/gist/" + this.props.gist.id}
+              gist={this.props.gist}
+            >
               { this.props.children }
             </Link>
           </div>
