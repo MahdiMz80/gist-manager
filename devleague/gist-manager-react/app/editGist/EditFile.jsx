@@ -3,14 +3,46 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import * as $ from'jquery';
+import auth from '../shared/auth';
+
 
 const EditFile = React.createClass({
   getInitialState() {
     return {
+      token: JSON.parse(auth.getToken()).token,
       originalFileName: this.props.file.filename,
       newFileName: this.props.file.filename,
       content : this.props.file.content
     }
+  },
+
+  handleDeleteFileSubmit() {
+    console.log(this.props.file, 'this.props.file');
+    var deleteFile = {
+      description : this.props.description,
+      files : {}
+    };
+    let file = {};
+    file[this.props.file.filename] = null;
+    deleteFile.files = file;
+
+    $.ajax({
+      url: "https://api.github.com/gists/" + this.props.gistId,
+      method: 'PATCH',
+      dataType: 'json',
+      data: JSON.stringify(deleteFile),
+      headers: {
+        'Authorization': 'token ' + this.state.token
+      },
+      cache: false,
+      success: function(data) {
+        console.log(data, 'SUCCESS');
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.id, status, err.toString());
+      }.bind(this)
+    });
   },
 
   handleFileNameChange(e) {
@@ -50,6 +82,7 @@ const EditFile = React.createClass({
             onChange={this.handleContentChange}
           /></label>
         </div>
+        <button onClick={this.handleDeleteFileSubmit} >Delete</button>
         <hr></hr>
       </div>
     )

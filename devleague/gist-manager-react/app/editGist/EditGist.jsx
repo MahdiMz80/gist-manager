@@ -16,11 +16,9 @@ export default React.createClass({
       files: [],
     }
   },
-
   objToArr(obj) {
     return Object.keys(obj).map((k) => obj[k])
   },
-
   initializeFileArr(files){
     let initFiles = this.objToArr(files)
     initFiles.map((file) => {
@@ -28,7 +26,6 @@ export default React.createClass({
     });
     return initFiles;
   },
-
   getGistData() {
     $.ajax({
       url: "https://api.github.com/gists/" + this.props.params.id,
@@ -49,7 +46,6 @@ export default React.createClass({
       }.bind(this)
     });
   },
-
   buildEditBody() {
     var updatedGist = {
       description : this.state.description,
@@ -65,7 +61,6 @@ export default React.createClass({
     })[0];
     return updatedGist;
   },
-
   handleEditGistSubmit(body) {
     $.ajax({
       url: "https://api.github.com/gists/" + this.props.params.id,
@@ -115,6 +110,8 @@ export default React.createClass({
           file={fileData}
           onFileNameChange={this.handleFileNameChange}
           onContentChange={this.handleContentChange}
+          description={this.state.description}
+          gistId={this.props.params.id}
           key={fileData.filename + Math.random()*100000}
         />
       )
