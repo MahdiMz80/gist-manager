@@ -100,6 +100,16 @@ export default React.createClass({
       }
     }
   },
+  handleFileDelete(filename) {
+    let updatedFiles = this.state.files;
+    for (var i = updatedFiles.length - 1; i >= 0; i--) {
+      if (updatedFiles[i].filename === filename) {
+        updatedFiles.splice(i, 1);
+        console.log(updatedFiles, 'splice')
+      }
+    }
+    this.setState({files: updatedFiles});
+  },
   componentDidMount() {
     this.getGistData();
   },
@@ -108,9 +118,10 @@ export default React.createClass({
       return (
         <EditFile
           file={fileData}
+          description={this.state.description}
           onFileNameChange={this.handleFileNameChange}
           onContentChange={this.handleContentChange}
-          description={this.state.description}
+          onFileDelete={this.handleFileDelete}
           gistId={this.props.params.id}
           key={fileData.filename + Math.random()*100000}
         />

@@ -18,15 +18,13 @@ const EditFile = React.createClass({
   },
 
   handleDeleteFileSubmit() {
-    console.log(this.props.file, 'this.props.file');
     var deleteFile = {
-      description : this.props.description,
-      files : {}
+      description: this.props.description,
+      files: {}
     };
     let file = {};
     file[this.props.file.filename] = null;
     deleteFile.files = file;
-
     $.ajax({
       url: "https://api.github.com/gists/" + this.props.gistId,
       method: 'PATCH',
@@ -38,9 +36,10 @@ const EditFile = React.createClass({
       cache: false,
       success: function(data) {
         console.log(data, 'SUCCESS');
+        this.props.onFileDelete(this.state.originalFileName);
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.id, status, err.toString());
+        console.error(this.props.gistId, status, err.toString());
       }.bind(this)
     });
   },
