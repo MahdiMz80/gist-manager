@@ -46,19 +46,22 @@ export default React.createClass({
       }.bind(this)
     });
   },
-  buildEditBody() {
+  buildNewGist() {
     var updatedGist = {
       description : this.state.description,
       files : {}
     };
-    updatedGist.files = this.state.files.map((file)=> {
+    let files = {};
+    for (var i = 0; i < this.state.files.length; i++) {
       let newFile = {};
-      newFile[file.originalFileName] =  {
-        filename: file.filename,
-        content: file.content
-      }
-      return newFile;
-    })[0];
+      newFile =  {
+        filename: this.state.files[i].originalFileName,
+        content: this.state.files[i].content
+      };
+      console.log(newFile, 'newFile');
+      files[this.state.files[i].filename] = newFile;
+    }
+    updatedGist.files = files;
     return updatedGist;
   },
   handleEditGistSubmit(body) {
@@ -73,6 +76,7 @@ export default React.createClass({
       cache: false,
       success: function(data) {
         console.log(data, 'SUCCESS');
+        window.location = '/gist/' + data.id;
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.params, status, err.toString());

@@ -51,15 +51,20 @@ export default React.createClass({
       cache: false,
       success: function(data) {
         console.log(data, 'SUCCESS');
+        window.location = '/gist/' + data.id;
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.params, status, err.toString());
       }.bind(this)
     });
   },
-  handleSubmit(e) {
+  handleNewPublicSubmit(e) {
     e.preventDefault();
     this.handleNewGistSubmit(this.buildNewGist(true));
+  },
+  handleNewPrivateSubmit(e) {
+    e.preventDefault();
+    this.handleNewGistSubmit(this.buildNewGist(false));
   },
   handleAddFile(e) {
     e.preventDefault();
@@ -114,8 +119,9 @@ export default React.createClass({
       <div>
         <h2>New Gist</h2>
         <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
-        <button onClick={this.handleSubmit}>Create Public Gist</button>
         <button onClick={this.handleAddFile}>Add File</button>
+        <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
+        <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>
         <p>{this.state.description}</p>
         <form>
           <span>Description</span>
@@ -129,8 +135,9 @@ export default React.createClass({
           /></label>
           { editFileNode }
           <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
-          <button onClick={this.handleSubmit}>Create Public Gist</button>
           <button onClick={this.handleAddFile}>Add File</button>
+          <button onClick={this.handleNewPublicSubmit}>Create Public Gist</button>
+          <button onClick={this.handleNewPrivateSubmit}>Create Private Gist</button>
         </form>
       </div>
     )
