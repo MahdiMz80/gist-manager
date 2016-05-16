@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 'use strict';
 
 import React from 'react';
@@ -7,7 +8,6 @@ import Logout from './shared/Logout.jsx';
 import Home from './home/Home.jsx';
 import auth from './shared/auth';
 import styles from './App.scss';
-
 
 export default React.createClass({
   getInitialState() {
@@ -38,9 +38,9 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <header className={styles.header}>
-          <h1>Gist Manager</h1>
-          <ul role="nav">
+        <header>
+          <a className="header--logo">Gist Manager</a>
+          <ul className="header--nav">
             <li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
             {this.state.loggedIn ? (
@@ -64,11 +64,18 @@ export default React.createClass({
             )}
           </ul>
         </header>
-          <div className="container">
-            {
-                this.props.children || <Home/>
-            }
+
+        <div className="container content">
+          {
+              this.props.children || <Home/>
+          }
+        </div>
+
+        <footer className="footer">
+          <div className="footer-content">
+            <p>Site by Joe.</p>
           </div>
+        </footer>
       </div>
     )
   }

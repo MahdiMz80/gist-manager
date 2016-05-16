@@ -1,5 +1,58 @@
 $purple: purple;
+$white: white;
+$bg: #bdbaf3;
+$red: tomato;
 
-.header {
+.content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  width: 100%;
   background-color: $purple;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: row;
+}
+
+a {
+  text-decoration: none;
+  color: $white;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  li {
+    /*padding: 0 1rem;*/
+    padding: .5rem 1rem;
+  }
+}
+
+.header--logo {
+  padding: .5rem 1rem;
+  flex: 1 0 auto;
+  order: 10;
+}
+
+.header--nav {
+  flex: 0 1 auto;
+  order: 20;
+}
+
+.footer {
+  background-color: $red;
+
+  .footer-content {
+    padding: 30px;
+    text-align: center;
+  }
 }

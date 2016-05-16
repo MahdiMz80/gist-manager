@@ -43,7 +43,7 @@ const Gists = React.createClass({
   render: function() {
     return (
       <div className={styles.gistList}>
-        <h1>GitHub Gist Manager Dashboard</h1>
+        <h1>Gist Manager Dashboard</h1>
         <GistList gistData={this.state.gists} />
       </div>
     )

@@ -16,7 +16,6 @@ const GistList = React.createClass({
 
     return (
       <div className='gistList'>
-        <h2>Gist List</h2>
         { gistListNode }
       </div>
     )

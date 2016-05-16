@@ -164,17 +164,18 @@ export default React.createClass({
         <button onClick={this.handleSubmit}>Save</button>
         <button onClick={this.handleDeleteGistSubmit}>Delete Gist</button>
         <button onClick={this.handleAddFile}>Add File</button>
-        <p>{this.state.description}</p>
         <form>
-          <span>Description</span>
-          <label><input
+          <label for="description">Description</label>
+          <input
+            ref="description"
+            type='text'
+            id='description'
+            className="u-full-width"
             placeholder={this.state.description}
-            name="description"
-            id="description"
             value={this.state.description}
             defaultValue={this.state.description}
             onChange={this.handleDescriptionChange}
-          /></label>
+          />
           { editFileNode }
           <button><Link to={"/gist/" + this.props.params.id}>Cancel</Link></button>
           <button onClick={this.handleSubmit}>Save</button>

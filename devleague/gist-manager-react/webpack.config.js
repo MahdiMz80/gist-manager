@@ -29,11 +29,6 @@ module.exports = {
     })
   ],
   module: {
-    // preLoaders: [{
-    //   test: /(\.js$|\.jsx$)/,
-    //   exclude: /node_modules/,
-    //   loader: "eslint-loader"
-    // }],
     loaders: [{
       test: /(\.js$|\.jsx$)/,
       exclude: /node_modules/,
@@ -44,9 +39,6 @@ module.exports = {
     }, {
       test: /\.json?$/,
       loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }, {
       test: /\.scss$/,
       loaders: ["style", "css", "sass"]
