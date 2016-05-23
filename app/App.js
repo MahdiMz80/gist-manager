@@ -40,10 +40,9 @@ export default React.createClass({
       <div className="site">
         <header>
           {this.state.loggedIn ? (
-            <NavLink to="/gists" onlyActiveOnIndex={true}>Gist Manager</NavLink>
+            <NavLink to="/gists" onlyActiveOnIndex={true} className="header--logo">Gist Manager</NavLink>
           ) : (
-            <a href='/' className="header--logo">Gist Manager</a>
-            <NavLink to="/" onlyActiveOnIndex={true}>Gist Manager</NavLink>
+          <NavLink to="/" onlyActiveOnIndex={true} className="header--logo">Gist Manager</NavLink>
           )}
           <ul className="header--nav">
             {this.state.loggedIn ? (
