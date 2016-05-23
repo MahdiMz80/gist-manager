@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import App from './App.jsx';
+import App from './App';
 import Home from './home/Home.jsx';
 import Gists from './gists/gists/Gists.jsx';
 import Gist from './gists/gist/Gist.jsx';

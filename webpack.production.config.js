@@ -39,7 +39,7 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.js?$/,
+      test: /(\.js$|\.jsx$)/,
       exclude: /node_modules/,
       loader: 'babel',
       query: {
@@ -48,9 +48,14 @@ module.exports = {
     }, {
       test: /\.json?$/,
       loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+    },
+    // {
+    //   test: /\.css$/,
+    //   loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+    // },
+    {
+      test: /\.scss$/,
+      loaders: ["style", "css", "sass"]
     }]
   },
   postcss: [
