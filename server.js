@@ -109,14 +109,14 @@
     app.use(middleware);
     app.use(webpackHotMiddleware(compiler));
     app.get('*', function response(req, res) {
-      console.log(path.join(__dirname, 'dist/index.html'), 'path.join');
-        res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
+        res.write(middleware.fileSystem.readFileSync(path.resolve(__dirname, 'dist/index.html')));
         res.end();
       });
   } else {
+    console.log(path.resolve(__dirname, 'dist/index.html'), 'path.resolve');
     app.use(express.static(__dirname + '/dist'));
     app.get('*', function response(req, res) {
-      res.sendFile(path.join(__dirname, 'dist/index.html'));
+      res.sendFile(path.resolve(__dirname, 'dist/index.html'));
     });
   }
 
