@@ -5,9 +5,6 @@
   const path = require('path');
   const express = require('express');
   const webpack = require('webpack');
-  const webpackMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('./webpack.config.js');
   const passport = require('passport');
   const session = require('express-session');
   const bodyParser = require('body-parser');
@@ -24,14 +21,16 @@
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(methodOverride());
+
   if (isDeveloping) {
+    const config = require('./webpack.config.js');
     const CONFIG = require('./config/config');
     const SECRET = CONFIG.SESSION_SECRET;
     const GH_ID = CONFIG.GITHUB.ID;
     const GH_SECRET = CONFIG.GITHUB.SECRET;
 
   } else {
-    // Prod
+    const config = require('./webpack.production.config.js');
     const SECRET = process.env.SESSION_SECRET;
     const GH_ID = process.env.GITHUB_ID;
     const GH_SECRET = process.env.GITHUB_SECRET;
@@ -86,6 +85,8 @@
   });
 
   if (isDeveloping) {
+    const webpackMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
     const compiler = webpack(config);
     const middleware = webpackMiddleware(compiler, {
       publicPath: config.output.publicPath,
