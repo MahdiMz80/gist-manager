@@ -5,6 +5,8 @@ A GitHub Gist manager built using React JS
 ## Introduction
 Gist Manager allows people to manage their Github Gists all from one place. This web app allows people to add, edit and delete Gists stored on their Github account.
 
+### [Check out the live demo](https://gist-manager-29695.herokuapp.com/gists)
+
 ## Install and Running
 **NOTE!** Use the latest version of Node, 4.x.x.
 1. cd gist-manager

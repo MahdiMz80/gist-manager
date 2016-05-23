@@ -110,7 +110,6 @@
       }
     });
 
-    // app.use(express.static(__dirname + '/public'));
     app.use(middleware);
     app.use(webpackHotMiddleware(compiler));
     app.get('*', function response(req, res) {
