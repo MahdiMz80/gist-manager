@@ -17,6 +17,7 @@
   let SECRET;
   let GH_ID;
   let GH_SECRET;
+  var GH_CALLBACK_URL;
 
   const isDeveloping = process.env.NODE_ENV !== 'production';
   const port = isDeveloping ? 3000 : process.env.PORT;
@@ -34,11 +35,13 @@
     SECRET = CONFIG.SESSION_SECRET;
     GH_ID = CONFIG.GITHUB.ID;
     GH_SECRET = CONFIG.GITHUB.SECRET;
+    GH_CALLBACK_URL = 'http://0.0.0.0:3000/auth/github/callback';
   } else {
     config = require('./webpack.production.config.js');
     SECRET = process.env.SESSION_SECRET;
     GH_ID = process.env.GITHUB_ID;
     GH_SECRET = process.env.GITHUB_SECRET;
+    GH_CALLBACK_URL = 'https://gist-manager-29695.herokuapp.com/auth/github/callback';
   }
 
   app.use(session({
@@ -57,10 +60,11 @@
     done(null, obj);
   });
 
+  console.log(GH_CALLBACK_URL, 'GH_CALLBACK_URL')
   passport.use(new GitHubStrategy({
     clientID: GH_ID,
     clientSecret: GH_SECRET,
-    callbackURL: 'https://gist-manager-29695.herokuapp.com/auth/github/callback'
+    callbackURL: GH_CALLBACK_URL,
   },
   function(accessToken, refreshToken, profile, done) {
     profile.accessToken = accessToken;
@@ -106,7 +110,7 @@
       }
     });
 
-    app.use(express.static(__dirname + '/public'));
+    // app.use(express.static(__dirname + '/public'));
     app.use(middleware);
     app.use(webpackHotMiddleware(compiler));
     app.get('*', function response(req, res) {
@@ -119,7 +123,7 @@
     app.get('*', function response(req, res) {
       res.sendFile(
         fs.readFileSync(
-          path.resolve(__dirname, '../dist/index.html')
+          path.join(__dirname, '../dist/index.html')
         )
       );
     });

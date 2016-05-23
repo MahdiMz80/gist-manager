@@ -118,7 +118,7 @@ export default React.createClass({
         <h2>New Gist</h2>
         <div className="new-btns">
           <div className="cancel-add-file-btns">
-            <Link to={"/gist/" + this.props.params.id}><button>Cancel</button></Link>
+            <Link to="/gists"><button>Cancel</button></Link>
             <button onClick={this.handleAddFile}>Add File</button>
           </div>
           <div className="create-public-private-btns">

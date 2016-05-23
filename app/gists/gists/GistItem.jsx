@@ -7,7 +7,6 @@ import styles from './GistItem.scss';
 
 const GistItem = React.createClass({
   render: function() {
-    console.log(this.props.gist, 'this.props.gist')
     return (
       <div className='GistItem'>
         <li>

@@ -7,6 +7,8 @@ import NavLink from './navigation/NavLink.jsx';
 import Logout from './shared/Logout.jsx';
 import Home from './home/Home.jsx';
 import auth from './shared/auth';
+import normalize from './shared/css/normalize.css';
+import skeletion from './shared/css/skeleton.css';
 import styles from './App.scss';
 
 export default React.createClass({
