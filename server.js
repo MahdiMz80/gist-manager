@@ -11,6 +11,11 @@
   const methodOverride = require('method-override');
   const GitHubStrategy = require('passport-github2').Strategy;
   const partials = require('express-partials');
+  let config;
+  let CONFIG;
+  let SECRET;
+  let GH_ID;
+  let GH_SECRET;
 
   const isDeveloping = process.env.NODE_ENV !== 'production';
   const port = isDeveloping ? 3000 : process.env.PORT;
@@ -23,18 +28,18 @@
   app.use(methodOverride());
 
   if (isDeveloping) {
-    const config = require('./webpack.config.js');
-    const CONFIG = require('./config/config');
-    const SECRET = CONFIG.SESSION_SECRET;
-    const GH_ID = CONFIG.GITHUB.ID;
-    const GH_SECRET = CONFIG.GITHUB.SECRET;
-
+    config = require('./webpack.config.js');
+    CONFIG = require('./config/config');
+    SECRET = CONFIG.SESSION_SECRET;
+    GH_ID = CONFIG.GITHUB.ID;
+    GH_SECRET = CONFIG.GITHUB.SECRET;
   } else {
-    const config = require('./webpack.production.config.js');
-    const SECRET = process.env.SESSION_SECRET;
-    const GH_ID = process.env.GITHUB_ID;
-    const GH_SECRET = process.env.GITHUB_SECRET;
+    config = require('./webpack.production.config.js');
+    SECRET = process.env.SESSION_SECRET;
+    GH_ID = process.env.GITHUB_ID;
+    GH_SECRET = process.env.GITHUB_SECRET;
   }
+
   app.use(session({
     secret: SECRET,
     resave: false,
