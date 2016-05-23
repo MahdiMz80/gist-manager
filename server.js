@@ -113,10 +113,10 @@
         res.end();
       });
   } else {
-    console.log(path.join(__dirname, '../dist/index.html'), 'path.resolve');
-    app.use(express.static(__dirname + '../dist'));
+    console.log(path.resolve(__dirname, 'dist/index.html'), 'path.resolve');
+    app.use(express.static(path.resolve(__dirname, 'dist/')));
     app.get('*', function response(req, res) {
-      res.sendFile(path.join(__dirname, '../dist/index.html'));
+      res.sendFile(path.resolve(__dirname, 'dist/index.html'));
     });
   }
 
