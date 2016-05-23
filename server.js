@@ -11,6 +11,7 @@
   const methodOverride = require('method-override');
   const GitHubStrategy = require('passport-github2').Strategy;
   const partials = require('express-partials');
+  const fs = require('fs');
   let config;
   let CONFIG;
   let SECRET;
@@ -116,7 +117,11 @@
     console.log(path.resolve(__dirname, 'dist/index.html'), 'path.resolve');
     app.use(express.static(path.resolve(__dirname, 'dist/')));
     app.get('*', function response(req, res) {
-      res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+      res.sendFile(
+        fs.readFileSync(
+          path.resolve(__dirname, 'dist/index.html')
+        )
+      );
     });
   }
 
