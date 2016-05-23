@@ -14,7 +14,6 @@
   const methodOverride = require('method-override');
   const GitHubStrategy = require('passport-github2').Strategy;
   const partials = require('express-partials');
-  const CONFIG = require('./config/config');
 
   const isDeveloping = process.env.NODE_ENV !== 'production';
   const port = isDeveloping ? 3000 : process.env.PORT;
@@ -25,7 +24,23 @@
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(methodOverride());
-  app.use(session({ secret: CONFIG.SESSION_SECRET, resave: false, saveUninitialized: false }));
+  if (isDeveloping) {
+    const CONFIG = require('./config/config');
+    const SECRET = CONFIG.SESSION_SECRET;
+    const GH_ID = CONFIG.GITHUB.ID;
+    const GH_SECRET = CONFIG.GITHUB.SECRET;
+
+  } else {
+    // Prod
+    const SECRET = process.env.SESSION_SECRET;
+    const GH_ID = process.env.GITHUB_ID;
+    const GH_SECRET = process.env.GITHUB_SECRET;
+  }
+  app.use(session({
+    secret: SECRET,
+    resave: false,
+    saveUninitialized: false
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(express.static(__dirname + '/public'));
@@ -39,8 +54,8 @@
   });
 
   passport.use(new GitHubStrategy({
-    clientID: CONFIG.GITHUB.ID,
-    clientSecret: CONFIG.GITHUB.SECRET,
+    clientID: GH_ID,
+    clientSecret: GH_SECRET,
     callbackURL: 'http://0.0.0.0:3000/auth/github/callback'
   },
   function(accessToken, refreshToken, profile, done) {
@@ -92,6 +107,7 @@
         res.end();
       });
   } else {
+
     app.use(express.static(__dirname + '/dist'));
     app.get('*', function response(req, res) {
       res.sendFile(path.join(__dirname, 'dist/index.html'));
