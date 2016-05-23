@@ -60,7 +60,7 @@
   passport.use(new GitHubStrategy({
     clientID: GH_ID,
     clientSecret: GH_SECRET,
-    callbackURL: 'http://0.0.0.0:3000/auth/github/callback'
+    callbackURL: 'https://gist-manager-29695.herokuapp.com/auth/github/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     profile.accessToken = accessToken;
