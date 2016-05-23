@@ -1,6 +1,9 @@
 {
   "name": "Gist-Manager",
   "version": "0.1.0",
+  "engines": {
+      "node": "5.8.0"
+  },
   "description": "A React application for managing your Github GISTs",
   "main": "server.js",
   "repository": {
