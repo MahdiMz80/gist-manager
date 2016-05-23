@@ -119,7 +119,7 @@
     app.get('*', function response(req, res) {
       res.sendFile(
         fs.readFileSync(
-          path.resolve(__dirname, 'dist/index.html')
+          path.resolve(__dirname, '../dist/index.html')
         )
       );
     });
