@@ -1,0 +1,10 @@
++ jsdom@6.5.1
++ eslint-plugin-import@1.16.0
++ eslint-plugin-import@1.16.0
++ eslint-plugin-jsx-a11y@1.5.5
++ eslint-plugin-react@5.2.2
++ eslint@2.13.1
++ eslint@2.13.1
+added 32 packages from 87 contributors, removed 32 packages, updated 8 packages, moved 1 package and audited 8906 packages in 9.534s
+found 38 vulnerabilities (12 low, 3 moderate, 22 high, 1 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
